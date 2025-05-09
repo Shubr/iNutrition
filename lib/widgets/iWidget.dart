@@ -45,7 +45,7 @@ Widget iTextField(String name, bool isPassword) {
 Widget iButton(String name, VoidCallback onPressed) {
   return (ElevatedButton(
     style: ElevatedButton.styleFrom(
-        side: BorderSide(width: 2.0, color: Colors.white),
+        side: const BorderSide(width: 2.0, color: Colors.white),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 4,
         shadowColor: const Color.fromARGB(255, 50, 50, 50),
@@ -54,7 +54,7 @@ Widget iButton(String name, VoidCallback onPressed) {
     onPressed: onPressed,
     child: Text(
       name,
-      style: TextStyle(fontFamily: "Afacad", fontSize: 26, color: Colors.white),
+      style: const TextStyle(fontFamily: "Afacad", fontSize: 26, color: Colors.white),
     ),
   ));
 }
