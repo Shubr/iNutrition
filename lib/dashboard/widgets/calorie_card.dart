@@ -8,7 +8,7 @@ class CalorieCard extends StatefulWidget {
   const CalorieCard({
     super.key,
     required this.calsCurrent,
-    required this.calsLeft, required DateTime Function() dateToday,
+    required this.calsLeft,
   });
 
   @override
@@ -22,58 +22,49 @@ class _CalorieCardState extends State<CalorieCard> {
   void initState() {
     super.initState();
     final now = DateTime.now();
-    formattedDate = DateFormat('EEE, MMM d').format(now); // e.g., "Wed, May 8"
+    formattedDate = DateFormat('EEE, MMM d').format(now);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 160,
-      height: 160,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color.fromARGB(0, 0, 0, 0), width: 2),
-        shape: BoxShape.circle,
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              formattedDate,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                fontFamily: "Afacad",
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              widget.calsCurrent,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Afacad",
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              widget.calsLeft,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                fontFamily: "Afacad",
-              ),
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 10),
             ),
           ],
+        ),
+        child: Center(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  formattedDate,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  widget.calsCurrent,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  widget.calsLeft,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
