@@ -54,6 +54,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/icons/backicon.svg
+    - assets/icons/bellicon.svg
   uses-material-design: true
 
   fonts:
