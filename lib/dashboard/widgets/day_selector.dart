@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 class DaySelector extends StatefulWidget {
   final List<DateTime> days;
   final ValueChanged<DateTime>? onDaySelected;
