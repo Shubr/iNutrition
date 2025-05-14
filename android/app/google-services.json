@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1070301737660",
+    "firebase_url": "https://inutrition-62e3c-default-rtdb.firebaseio.com",
+    "project_id": "inutrition-62e3c",
+    "storage_bucket": "inutrition-62e3c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070301737660:android:dbb3e517039eaf165416b9",
+        "android_client_info": {
+          "package_name": "com.example.inutrition"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBveooZ7MUnMWw33u54PWxfan-NCZcE_EE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
