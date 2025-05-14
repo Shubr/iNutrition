@@ -54,8 +54,8 @@ class _DaySelectorState extends State<DaySelector> {
     final index = widget.days.indexWhere((d) => _isSameDay(d, _selectedDay));
     if (index != -1) {
       final screenWidth = MediaQuery.of(context).size.width;
-      final itemWidth = 70.0;
-      final centerPosition = (index * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
+      const itemWidth = 40.0;
+      final centerPosition = (index * itemWidth) - (screenWidth / 4) + (itemWidth / 2);
 
       _scrollController.animateTo(
         centerPosition.clamp(0, _scrollController.position.maxScrollExtent),
