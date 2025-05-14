@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:inutrition/dashboard/dashboard.dart';
-import 'package:inutrition/login.dart';
-import 'package:inutrition/register.dart';
+import 'package:inutrition/auth/login.dart';
+import 'package:inutrition/auth/register.dart';
+import 'firebase_options.dart';
 
 void main() {
   runApp(const MaterialApp(

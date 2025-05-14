@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../firebase_options.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
