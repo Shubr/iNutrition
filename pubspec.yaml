@@ -36,9 +36,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   intl: ^0.20.2
+<<<<<<< HEAD
   firebase_core: ^3.13.0
   firebase_auth: ^5.5.3
   firebase_database: ^11.3.5
+=======
+  google_fonts: ^6.2.1
+  flutter_native_splash: ^2.4.6
+  firebase_core: ^3.13.0
+>>>>>>> b8724c87db389b41b6c756f425785979ea364432
 
 dev_dependencies:
   flutter_test:
@@ -49,8 +55,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
-
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -79,3 +85,15 @@ flutter:
     - family: Afacad
       fonts:
         - asset: assets/fonts/Afacad/Afacad.ttf
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/icons/SplashScreenLogo(1).png
+  android: true
+  ios: true
+  web: false
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path_ios: "assets/icons/icon.png"
+  image_path: "assets/icons/icon.png"

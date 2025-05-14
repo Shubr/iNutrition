@@ -57,8 +57,7 @@ Widget iButton(String name, VoidCallback onPressed) {
     onPressed: onPressed,
     child: Text(
       name,
-      style: const TextStyle(
-          fontFamily: "Afacad", fontSize: 26, color: Colors.white),
+      style: TextStyle(fontFamily: "Afacad", fontSize: 26, color: Colors.white),
     ),
   ));
 }
