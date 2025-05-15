@@ -1,0 +1,2 @@
+/Users/shub/inutrition/android/app/.cxx/Debug/4pzp2n1r/x86/CMakeFiles/edit_cache.dir
+/Users/shub/inutrition/android/app/.cxx/Debug/4pzp2n1r/x86/CMakeFiles/rebuild_cache.dir
