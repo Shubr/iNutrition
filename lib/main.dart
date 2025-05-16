@@ -1,9 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:inutrition/dashboard/dashboard.dart';
-import 'package:inutrition/login.dart';
-import 'package:inutrition/register.dart';
-import 'package:inutrition/stats.dart';
-
+import 'package:inutrition/auth/register.dart';
 void main() {
   runApp(const MaterialApp(
     home: MyApp(),
@@ -18,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
 
-      body: StatsPage(),
+      body: RegisterPage(),
     );
+    return const Scaffold(body: RegisterPage());
   }
 }
