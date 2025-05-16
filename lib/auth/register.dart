@@ -1,4 +1,6 @@
+import 'package:flutter/widgets.dart';
 import 'package:inutrition/widgets/iWidget.dart';
+import 'package:inutrition/auth/auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,11 +13,21 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  var firstName = TextEditingController();
+  var lastName = TextEditingController();
+  var studentId = TextEditingController();
+  var college = TextEditingController();
+  var course = TextEditingController();
+  var eMail = TextEditingController();
+  var password = TextEditingController();
+
+  String? fieldError = "";
   int currentStep = 0;
   void nextStep() {
     if (currentStep < 2) {
       setState(() {
         currentStep++;
+        fieldError = "";
       });
     }
   }
@@ -24,6 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (currentStep > 0) {
       setState(() {
         currentStep--;
+        fieldError = "";
       });
     }
   }
@@ -87,19 +100,32 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                iTextField("First Name", false),
+                                iTextField("First Name", false, firstName),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                iTextField("Last Name", false),
+                                iTextField("Last Name", false, lastName),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                iTextField("StudentId", false),
-                                const SizedBox(height: 80),
+                                iTextField("StudentId", false, studentId),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  fieldError.toString(),
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                const SizedBox(height: 70),
                                 iButton("Next", () {
                                   setState(() {
-                                    currentStep++;
+                                    if (firstName.text == "" ||
+                                        lastName.text == "" ||
+                                        studentId.text == "") {
+                                      fieldError = "Please enter all fields";
+                                    } else {
+                                      currentStep++;
+                                    }
                                   });
                                 })
                               ],
@@ -111,17 +137,28 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                iTextField("College", false),
+                                iTextField("College", false, college),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                iTextField("Course", false),
+                                iTextField("Course", false, course),
                                 const SizedBox(
-                                  height: 80,
+                                  height: 10,
                                 ),
+                                Text(
+                                  fieldError.toString(),
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                const SizedBox(height: 70),
                                 iButton("Next", () {
+                                  if (course.text == "") {}
                                   setState(() {
-                                    currentStep++;
+                                    if (course.text == "" ||
+                                        college.text == "") {
+                                      fieldError = "Please enter all fields";
+                                    } else {
+                                      currentStep++;
+                                    }
                                   });
                                 })
                               ],
@@ -133,16 +170,38 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                iTextField("eMail", false),
+                                iTextField("eMail", false, eMail),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                iTextField("Password", true),
+                                iTextField("Password", true, password),
                                 const SizedBox(
-                                  height: 80,
+                                  height: 10,
                                 ),
-                                iButton("Register", () {
-                                  setState(() {});
+                                Text(
+                                  fieldError.toString(),
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                const SizedBox(
+                                  height: 70,
+                                ),
+                                iButton("Register", () async {
+                                  if (eMail.text != "" || password.text != "") {
+                                    String? returnVal = await signUpNurse(
+                                        eMail.text, password.text);
+                                    if (returnVal == "") {
+                                      setState(() {
+                                        fieldError = "Successfull";
+                                      });
+                                    } else {
+                                      print("A$returnVal");
+                                      setState(() {
+                                        fieldError = returnVal;
+                                      });
+                                    }
+                                  } else {
+                                    fieldError = "Please fill all fields";
+                                  }
                                 })
                               ],
                             ),

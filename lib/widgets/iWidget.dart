@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget iTextField(String name, bool isPassword) {
+Widget iTextField(String name, bool isPassword, TextEditingController text) {
   return Container(
     constraints: BoxConstraints(maxWidth: 500),
     child: Column(
@@ -30,10 +30,14 @@ Widget iTextField(String name, bool isPassword) {
               ],
             ),
             child: TextField(
+              controller: text,
               obscureText: isPassword,
               cursorColor: Colors.black,
               style: const TextStyle(
-                  height: 1.5, fontFamily: "Afacad", fontSize: 20),
+                  decorationThickness: 0,
+                  height: 1.5,
+                  fontFamily: "Afacad",
+                  fontSize: 20),
               decoration: const InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 12, vertical: 14),
