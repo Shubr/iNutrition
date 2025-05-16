@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inutrition/dashboard/dashboard.dart';
 import 'package:inutrition/login.dart';
+import 'package:inutrition/register.dart';
+import 'package:inutrition/stats.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
 
-      body: LoginPage(),
+      body: StatsPage(),
     );
   }
 }
