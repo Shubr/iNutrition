@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 Widget iTextField(String name, bool isPassword, TextEditingController text) {
   return Container(
@@ -64,4 +65,12 @@ Widget iButton(String name, VoidCallback onPressed) {
       style: TextStyle(fontFamily: "Afacad", fontSize: 26, color: Colors.white),
     ),
   ));
+}
+
+Widget iLoadingAnimation() {
+  return Scaffold(
+    body: Center(
+        child: LoadingAnimationWidget.stretchedDots(
+            color: Colors.black87, size: 200)),
+  );
 }
