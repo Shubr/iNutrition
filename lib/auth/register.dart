@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:inutrition/model/data_model.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 import 'package:inutrition/auth/auth.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -20,6 +21,23 @@ class _RegisterPageState extends State<RegisterPage> {
   var course = TextEditingController();
   var eMail = TextEditingController();
   var password = TextEditingController();
+
+  List<String> studentList = [];
+
+  Future<List<String>> getAllStudentId() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance.collection("nurseDb").get();
+
+      for (QueryDocumentSnapshot<Map<String, dynamic>> doc
+          in querySnapshot.docs) {
+        studentList.add(doc.id);
+      }
+    } catch (e) {
+      print(e);
+    }
+    return studentList;
+  }
 
   String? fieldError = "";
   int currentStep = 0;
@@ -43,6 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    getAllStudentId();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -123,8 +142,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                         lastName.text == "" ||
                                         studentId.text == "") {
                                       fieldError = "Please enter all fields";
+                                    } else if (studentList
+                                        .contains(studentId.text)) {
+                                      fieldError = "StudentId already exists";
                                     } else {
-                                      currentStep++;
+                                      nextStep();
                                     }
                                   });
                                 })
@@ -157,7 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         college.text == "") {
                                       fieldError = "Please enter all fields";
                                     } else {
-                                      currentStep++;
+                                      nextStep();
                                     }
                                   });
                                 })
@@ -187,14 +209,22 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 iButton("Register", () async {
                                   if (eMail.text != "" || password.text != "") {
+                                    NurseModel nurseInfo = new NurseModel(
+                                        studentId.text,
+                                        firstName.text,
+                                        lastName.text,
+                                        college.text,
+                                        course.text,
+                                        eMail.text);
+                                    var info = nurseInfo.conver();
                                     String? returnVal = await signUpNurse(
-                                        eMail.text, password.text);
+                                        eMail.text, password.text, info);
                                     if (returnVal == "") {
                                       setState(() {
                                         fieldError = "Successfull";
                                       });
                                     } else {
-                                      print("A$returnVal");
+                                      print("$returnVal");
                                       setState(() {
                                         fieldError = returnVal;
                                       });

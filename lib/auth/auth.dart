@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
-Future<String?> signUpNurse(String eMail, String password) async {
+Future<String?> signUpNurse(
+    String eMail, String password, Map<String, dynamic> nurseDetail) async {
   try {
-    await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: eMail, password: password);
-    return "";
+    var studentId = nurseDetail["studentId"];
+     await FirebaseAuth.instance
+         .createUserWithEmailAndPassword(email: eMail, password: password);
+    await FirebaseFirestore.instance
+        .collection("nurseDb")
+        .doc(studentId)
+        .set(nurseDetail);
+    return "Successfully added to firestore";
   } catch (e) {
     if (e is FirebaseAuthException) {
       switch (e.code) {
@@ -20,10 +27,6 @@ Future<String?> signUpNurse(String eMail, String password) async {
         default:
           return 'Firebase Authentication error: ${e.message}--${e.code}';
       }
-    } else if (e is PlatformException) {
-      return 'A platform error occurred: ${e.message}';
-    } else {
-      return 'An unexpected error occurred. Please try again later.';
     }
   }
 }
