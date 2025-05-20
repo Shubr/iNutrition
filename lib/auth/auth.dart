@@ -6,10 +6,10 @@ Future<String?> signUpNurse(
     String eMail, String password, Map<String, dynamic> nurseDetail) async {
   try {
     var studentId = nurseDetail["studentId"];
-     await FirebaseAuth.instance
-         .createUserWithEmailAndPassword(email: eMail, password: password);
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: eMail, password: password);
     await FirebaseFirestore.instance
-        .collection("nurseDb")
+        .collection("nursingStudent")
         .doc(studentId)
         .set(nurseDetail);
     return "Successfully added to firestore";
