@@ -5,6 +5,7 @@ import 'package:inutrition/auth/register.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: MyApp(),
   ));
 }

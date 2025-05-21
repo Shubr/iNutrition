@@ -31,9 +31,11 @@ Future<String?> signUpNurse(
   }
 }
 
-Future signUpStudent(String eMail, String password) async {}
-
-Future logIn(String eMail, String password) async {
-  await FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: eMail, password: password);
+Future<String?> logIn(String eMail, String password) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: eMail, password: password);
+  } catch (e) {}
 }
+
+Future signUpStudent(String eMail, String password) async {}

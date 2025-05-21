@@ -75,7 +75,9 @@ class _RegisterPageState extends State<RegisterPage> {
             colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
           ),
           onPressed: () {
-            if (currentStep == 0) {}
+            if (currentStep == 0) {
+              Navigator.pop(context, "/login");
+            }
             if (currentStep > 0) {
               setState(() {
                 currentStep--;
