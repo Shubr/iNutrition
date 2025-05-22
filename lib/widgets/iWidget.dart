@@ -54,7 +54,7 @@ Widget iButton(String name, VoidCallback onPressed) {
   return (ElevatedButton(
     style: ElevatedButton.styleFrom(
         side: const BorderSide(width: 2.0, color: Colors.white),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
         shadowColor: const Color.fromARGB(255, 50, 50, 50),
         backgroundColor: Colors.black,
@@ -62,7 +62,11 @@ Widget iButton(String name, VoidCallback onPressed) {
     onPressed: onPressed,
     child: Text(
       name,
-      style: TextStyle(fontFamily: "Afacad", fontSize: 26, color: Colors.white),
+      style: TextStyle(
+          fontFamily: "Afacad",
+          fontSize: 26,
+          color: Colors.white,
+          fontWeight: FontWeight.bold),
     ),
   ));
 }

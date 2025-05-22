@@ -211,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 iButton("Register", () async {
                                   if (eMail.text != "" || password.text != "") {
-                                    NurseModel nurseInfo = new NurseModel(
+                                    NurseModel nurseInfo = NurseModel(
                                         studentId.text,
                                         firstName.text,
                                         lastName.text,
@@ -226,7 +226,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                         fieldError = "Successfull";
                                       });
                                     } else {
-                                      print("$returnVal");
                                       setState(() {
                                         fieldError = returnVal;
                                       });

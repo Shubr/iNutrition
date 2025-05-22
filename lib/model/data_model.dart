@@ -26,7 +26,7 @@ class NurseModel {
     firstName = firstname;
     lastName = lastname;
     collegeName = collegename;
-    courseName = collegename;
+    courseName = coursename;
     eMail = email;
   }
 

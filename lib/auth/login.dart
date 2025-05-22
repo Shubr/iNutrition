@@ -1,14 +1,26 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 import '../firebase_options.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
   Widget build(BuildContext context) {
-    var eMail = TextEditingController();
+    var studentId = TextEditingController();
     var password = TextEditingController();
+
+    String? errorMessage = "";
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -33,26 +45,24 @@ class LoginPage extends StatelessWidget {
                         MainAxisAlignment.center, // vertical centering
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      iTextField("eMail", false, TextEditingController()),
+                      iTextField("Student ID", false, studentId),
                       SizedBox(
                         height: 10,
                       ),
-                      iTextField("password", true, TextEditingController()),
-                      // Align(
-                      //   child: GestureDetector(
-                      //     onTap: () {
-                      //       print("click");
-                      //     },
-                      //     child: const Text(
-                      //       "Forgot Password?",
-                      //       style: TextStyle(
-                      //           color: Colors.grey, fontFamily: "Afacad"),
-                      //     ),
-                      //   ),
-                      // ),
-                      const SizedBox(height: 30),
-                      iButton('Login', () {}),
-                      const SizedBox(height: 10),
+                      iTextField("password", true, password),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        errorMessage.toString(),
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      const SizedBox(height: 70),
+                      iButton('Login', () {
+                        print("Signing");
+                        logIn(studentId.text, password.text);
+                      }),
+                      const SizedBox(height: 20),
                       Align(
                         child: GestureDetector(
                           onTap: () {
