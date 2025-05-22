@@ -102,7 +102,7 @@ Future<String> getRole(String studentId) async {
   } catch (e) {
     log("Error: $e");
   }
-  return "";
+  return "Student dosen't exist.";
 }
 
 Future signUpStudent(String eMail, String password) async {}

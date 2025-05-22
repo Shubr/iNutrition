@@ -14,13 +14,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var studentId = TextEditingController();
+  var password = TextEditingController();
+
+  String? errorMessage = "";
   @override
   Widget build(BuildContext context) {
-    var studentId = TextEditingController();
-    var password = TextEditingController();
-
-    String? errorMessage = "";
-
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -59,6 +58,18 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 70),
                       iButton('Login', () async {
+                        setState(() {
+                          errorMessage = '';
+                        });
+                        if (studentId.text == "" || password.text == "") {
+                          setState(() {
+                            errorMessage = "Please fill in all fields";
+                          });
+                          return;
+                        }
+                        if (!mounted) {
+                          return;
+                        }
                         try {
                           String role =
                               await logIn(studentId.text, password.text);
@@ -69,10 +80,15 @@ class _LoginPageState extends State<LoginPage> {
                           } else if (role == 'exerciseStudent') {
                             Navigator.pushReplacementNamed(
                                 context, '/execStudentDashboard');
+                          } else {
+                            setState(() {
+                              errorMessage =
+                                  "Sorry this Student isn't registered";
+                            });
                           }
                         } catch (e) {
                           setState(() {
-                            errorMessage = e.toString();
+                            errorMessage = "ERROR: $e";
                           });
                         }
                       }),
