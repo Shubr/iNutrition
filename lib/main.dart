@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:inutrition/auth/login.dart';
 import 'package:inutrition/auth/register.dart';
 import 'package:inutrition/firebase_options.dart';
+import 'package:inutrition/nursePages/dashboard.dart';
+import 'package:inutrition/dashboard/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,10 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
+      home: LoginPage(),
       routes: {
-        '/login': (context) => LoginPage(),
-        '/register': (content) => const RegisterPage()
+        '/login': (context) => const LoginPage(),
+        '/register': (content) => const RegisterPage(),
+        '/nursingDashboard': (context) => NurseingDashboard(),
+        '/execStudentDashboard': (context) => DashboardPage()
       },
     );
   }

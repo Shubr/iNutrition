@@ -52,6 +52,7 @@ Future<String> logIn(String studentId, String password) async {
           await FirebaseAuth.instance.signInWithEmailAndPassword(
               email: data['eMail'], password: password);
           log("successfully signed in as nurse");
+          return 'nursingStudent';
         }
       } else {
         return "Coun't find Student";
@@ -67,6 +68,7 @@ Future<String> logIn(String studentId, String password) async {
           await FirebaseAuth.instance.signInWithEmailAndPassword(
               email: data['eMail'], password: password);
           log("succesfully signed in as student");
+          return 'exerciseStudent';
         }
       } else {
         return "Coun't find Student";

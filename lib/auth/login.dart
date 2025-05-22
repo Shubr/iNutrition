@@ -58,9 +58,23 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: Colors.red),
                       ),
                       const SizedBox(height: 70),
-                      iButton('Login', () {
-                        print("Signing");
-                        logIn(studentId.text, password.text);
+                      iButton('Login', () async {
+                        try {
+                          String role =
+                              await logIn(studentId.text, password.text);
+                          if (role == "nursingStudent") {
+                            print("loggin in as nurse...");
+                            Navigator.pushReplacementNamed(
+                                context, '/nursingDashboard');
+                          } else if (role == 'exerciseStudent') {
+                            Navigator.pushReplacementNamed(
+                                context, '/execStudentDashboard');
+                          }
+                        } catch (e) {
+                          setState(() {
+                            errorMessage = e.toString();
+                          });
+                        }
                       }),
                       const SizedBox(height: 20),
                       Align(
