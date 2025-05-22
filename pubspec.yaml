@@ -84,6 +84,11 @@ flutter:
     - family: Afacad
       fonts:
         - asset: assets/fonts/Afacad/Afacad.ttf
+    - family: Alex
+      fonts:
+        - asset: assets/fonts/Alex/Alex_reg.ttf
+        - asset: assets/fonts/Alex/Alex_bold.ttf
+          weight: 600
 
 flutter_native_splash:
   color: "#FFFFFF"
@@ -97,4 +102,4 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/icons/icon.png"
   adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/icons/icon.png"    
+  adaptive_icon_foreground: "assets/icons/icon.png"

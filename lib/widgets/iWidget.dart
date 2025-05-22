@@ -71,6 +71,8 @@ Widget iButton(String name, VoidCallback onPressed) {
   ));
 }
 
+
+
 Widget iLoadingAnimation() {
   return Scaffold(
     body: Center(
@@ -78,3 +80,4 @@ Widget iLoadingAnimation() {
             color: Colors.black87, size: 200)),
   );
 }
+
