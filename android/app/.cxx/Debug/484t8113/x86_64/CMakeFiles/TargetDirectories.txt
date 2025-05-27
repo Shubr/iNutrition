@@ -1,0 +1,2 @@
+C:/Users/aanto/OneDrive/Desktop/D301/iNutrition_x1.0/iNutrition/android/app/.cxx/Debug/484t8113/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/aanto/OneDrive/Desktop/D301/iNutrition_x1.0/iNutrition/android/app/.cxx/Debug/484t8113/x86_64/CMakeFiles/rebuild_cache.dir

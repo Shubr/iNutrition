@@ -1,10 +1,7 @@
-import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/widgets/iWidget.dart';
-import '../firebase_options.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

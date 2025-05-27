@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 
 Future<String?> signUpNurse(
     String eMail, String password, Map<String, dynamic> nurseDetail) async {
@@ -33,6 +32,7 @@ Future<String?> signUpNurse(
       }
     }
   }
+  return null;
 }
 
 Future<String> logIn(String studentId, String password) async {

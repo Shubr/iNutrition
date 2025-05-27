@@ -29,44 +29,47 @@ class _CalorieCardState extends State<CalorieCard> {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6,
-              offset: Offset(0, 10),
-            ),
-          ],
+child: Container(
+  padding: const EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    color: Colors.white,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.2),
+        blurRadius: 12,
+        spreadRadius: 2,
+        offset: const Offset(0, 8),
+      ),
+    ],
+  ),
+  child: Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          formattedDate,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.grey[600],
+              ),
         ),
-        child: Center(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  formattedDate,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  widget.calsCurrent,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  widget.calsLeft,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+        const SizedBox(height: 8),
+        Text(
+          widget.calsCurrent,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          widget.calsLeft,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
+          )
+        )
+      )
+    ;
   }
 }
