@@ -1,0 +1,2 @@
+/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/6o303g2a/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/6o303g2a/armeabi-v7a/CMakeFiles/rebuild_cache.dir
