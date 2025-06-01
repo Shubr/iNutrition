@@ -56,6 +56,8 @@ flutter:
     - family: Afacad
       fonts:
         - asset: assets/fonts/Afacad/Afacad.ttf
+        - asset: assets/fonts/Afacad/Afacad-Bold.ttf
+          weight: 800
     - family: Alex
       fonts:
         - asset: assets/fonts/Alex/Alex_reg.ttf
