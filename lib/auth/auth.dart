@@ -106,3 +106,11 @@ Future<String> getRole(String studentId) async {
 }
 
 Future signUpStudent(String eMail, String password) async {}
+
+Future signOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+  } catch (e) {
+    log(e.toString());
+  }
+}

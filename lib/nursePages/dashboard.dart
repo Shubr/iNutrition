@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 
 class NurseingDashboard extends StatefulWidget {
@@ -19,7 +20,14 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
           surfaceTintColor: Colors.white,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  try {
+                    signOut();
+                    Navigator.pushReplacementNamed(context, '/login');
+                  } catch (e) {
+                    print(e);
+                  }
+                },
                 icon: SvgPicture.asset(
                   "assets/icons/sign_outIcon.svg",
                 ))
@@ -46,14 +54,29 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
                       spacing: 20,
                       children: [
-                        iStudentCard("Shubham Rangra", 40, () {}),
-                        iStudentCard("Antonio Munro", 90, () {}),
-                        iStudentCard("Jessey Tau", 80, () {}),
+                        // iStudentCard("Shubham Rangra", 40, () {}),
+                        // iStudentCard("Antonio Munro", 90, () {}),
+                        // iStudentCard("Jessey Tau", 80, () {}),
+                        StudentCard(
+                            stdName: "Shubham Rangra",
+                            todayCalPrecent: 65,
+                            onPress: () {}),
+                        StudentCard(
+                            stdName: "Antonio Munro",
+                            todayCalPrecent: 80,
+                            onPress: () {}),
+                        StudentCard(
+                            stdName: "Jesse Tau",
+                            todayCalPrecent: 50,
+                            onPress: () {})
                       ],
                     ),
                   ),
