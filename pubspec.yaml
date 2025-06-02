@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  camera: ^0.11.1
+  google_mlkit_barcode_scanning: ^0.14.1
   flutter_svg: ^2.0.9
   loading_animation_widget: ^1.2.1 # Added missing version
   cupertino_icons: ^1.0.6

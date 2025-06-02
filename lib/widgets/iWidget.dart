@@ -50,7 +50,12 @@ Widget iTextField(String name, bool isPassword, TextEditingController text) {
   );
 }
 
-Widget iTextFieldv2(String name, bool isPassword, TextEditingController text) {
+Widget iTextFieldv2(
+  String name,
+  bool isPassword,
+  TextEditingController text,
+  String currentCal,
+) {
   return Container(
     constraints: BoxConstraints(maxWidth: 500),
     child: Column(
@@ -77,7 +82,9 @@ Widget iTextFieldv2(String name, bool isPassword, TextEditingController text) {
                   height: 1.5,
                   fontFamily: "Afacad",
                   fontSize: 20),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                hintText: currentCal,
+                hintStyle: TextStyle(color: Colors.grey),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                 border: InputBorder.none,
@@ -270,7 +277,7 @@ class _StudentCardState extends State<StudentCard> {
                           height: 20,
                         ),
                         iTextFieldv2("Daily Calorie inTake", false,
-                            TextEditingController()),
+                            TextEditingController(), "2"),
                         SizedBox(
                           height: 20,
                         ),
