@@ -6,6 +6,7 @@ import 'package:inutrition/execStudentPage/scanner.dart';
 import 'package:inutrition/firebase_options.dart';
 import 'package:inutrition/nursePages/dashboard.dart';
 import 'package:inutrition/dashboard/dashboard.dart';
+import 'package:inutrition/nursePages/registerExecStudent.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +15,7 @@ void main() async {
   });
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: RegisterExecStudent(),
   ));
 }
 
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
         '/nursingDashboard': (context) => NurseingDashboard(),
-        '/execStudentDashboard': (context) => DashboardPage()
+        '/execStudentDashboard': (context) => DashboardPage(),
+        '/registerExecStudent': (context) => RegisterExecStudent()
       },
     );
   }
