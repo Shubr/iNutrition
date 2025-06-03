@@ -1,3 +1,35 @@
+**iNutrition**
+
+Nutrition app to help with dieting for Nursing and Exercise student's clients.
+
+Getting Started
+Dependencies
+
+    Cocoapods
+    Flutter
+    VS Code
+
+Installing
+
+    flutter create my_app
+    cd my_app
+    flutter analyze
+    flutter test
+    flutter run lib/main.dart
+
+    sudo gem install cocoapods
+    pod setup
+    pod init
+    pod install
+
+Executing program
+
+    pod install
+    flutter 
+    flutter run
+    
+
+
 # inutrition
 
 A new Flutter project.
