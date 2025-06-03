@@ -24,7 +24,7 @@ Widget iTextField(String name, bool isPassword, TextEditingController text) {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color.fromARGB(255, 104, 104, 104),
+                  color: const Color.fromARGB(255, 233, 233, 233),
                   blurRadius: 5,
                   offset: const Offset(0, 5),
                 ),

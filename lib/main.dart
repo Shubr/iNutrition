@@ -6,6 +6,7 @@ import 'package:inutrition/execStudentPage/scanner.dart';
 import 'package:inutrition/firebase_options.dart';
 import 'package:inutrition/nursePages/dashboard.dart';
 import 'package:inutrition/dashboard/dashboard.dart';
+import 'package:inutrition/nursePages/registerExecStudent.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BarcodeScannerPage(),
+      home: RegisterExecStudent(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
