@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<List<String>> getAllStudentId() async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance.collection("nurseDb").get();
+          await FirebaseFirestore.instance.collection("nursingStudent").get();
 
       for (QueryDocumentSnapshot<Map<String, dynamic>> doc
           in querySnapshot.docs) {
@@ -210,7 +210,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   height: 70,
                                 ),
                                 iButton("Register", () async {
-                                  if (eMail.text != "" || password.text != "") {
+                                  if (eMail.text != "" && password.text != "") {
                                     NurseModel nurseInfo = NurseModel(
                                         studentId.text,
                                         firstName.text,

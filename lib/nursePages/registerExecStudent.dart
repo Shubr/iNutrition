@@ -1,6 +1,27 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:inutrition/auth/auth.dart';
+import 'package:inutrition/model/data_model.dart';
 import 'package:inutrition/widgets/iWidget.dart';
+
+List<String> studentList = [];
+var error = "Hello";
+
+Future<List<String>> getStudent() async {
+  try {
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection("execStudent").get();
+    for (QueryDocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
+      studentList.add(doc.id);
+    }
+  } catch (err) {
+    print(err);
+  }
+  return studentList;
+}
 
 class RegisterExecStudent extends StatefulWidget {
   const RegisterExecStudent({super.key});
@@ -15,6 +36,20 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
     return _registerPage();
   }
 
+  var firstName = TextEditingController();
+  var lastName = TextEditingController();
+  var studentId = TextEditingController();
+  var age = TextEditingController();
+  var gender = "";
+  var height = TextEditingController();
+  var weight = TextEditingController();
+  var ethnicity = TextEditingController();
+  var medical = TextEditingController();
+  var goalWeight = TextEditingController();
+  var dailyCalGoal = TextEditingController();
+  var eMail = TextEditingController();
+  var password = TextEditingController();
+
   int currentStep = 0;
 
   void _back() {
@@ -23,12 +58,11 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
         currentStep -= 1;
       });
     } else {
-      Navigator.pop(context, "/login");
+      Navigator.pushReplacementNamed(context, "/nursingDashboard");
     }
   }
 
   void _next() {
-    print(currentStep.toString());
     if (currentStep < 3) {
       setState(() {
         currentStep += 1;
@@ -37,6 +71,7 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
   }
 
   Widget _registerPage() {
+    getStudent();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -76,17 +111,24 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                           spacing: 20,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            iTextField(
-                                "First Name", false, TextEditingController()),
-                            iTextField(
-                                "Last Name", false, TextEditingController()),
-                            iTextField(
-                                "Student ID", false, TextEditingController()),
+                            iTextField("First Name", false, firstName),
+                            iTextField("Last Name", false, lastName),
+                            iTextField("Student ID", false, studentId),
+                            Text(
+                              error,
+                              style: TextStyle(color: Colors.red),
+                            ),
                             SizedBox(
                               height: 70,
                             ),
                             iButton("Next", () {
-                              _next();
+                              if (studentList.contains(studentId.text)) {
+                                setState(() {
+                                  error = "Student with this ID already exists";
+                                });
+                              } else {
+                                _next();
+                              }
                             })
                           ],
                         ),
@@ -109,15 +151,21 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                     child: Column(
                       spacing: 20,
                       children: [
-                        iTextField("Age", false, TextEditingController()),
-                        iTextField("Age", false, TextEditingController()),
-                        iTextField(
-                            "Height(cm)", false, TextEditingController()),
-                        iTextField(
-                            "Weight(kg)", false, TextEditingController()),
-                        iTextField("Ethnicity", false, TextEditingController()),
-                        iTextField("Exiting Media Condition", false,
-                            TextEditingController()),
+                        iTextField("Age", false, age),
+                        iRadio(
+                            category: "Gender",
+                            title1: "Male",
+                            title2: "Female",
+                            selected: gender,
+                            onChange: (value) {
+                              setState(() {
+                                gender = value;
+                              });
+                            }),
+                        iTextField("Height(cm)", false, height),
+                        iTextField("Weight(kg)", false, weight),
+                        iTextField("Ethnicity", false, ethnicity),
+                        iTextField("Exiting Medical Condition", false, medical),
                         iButton("Next", () {
                           _next();
                         })
@@ -144,10 +192,9 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                           spacing: 20,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            iTextField("Goal Weight(kg)", false,
-                                TextEditingController()),
+                            iTextField("Goal Weight(kg)", false, goalWeight),
                             iTextField("Daily Calories Goal(cal)", false,
-                                TextEditingController()),
+                                dailyCalGoal),
                             SizedBox(
                               height: 70,
                             ),
@@ -179,14 +226,30 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                           spacing: 20,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            iTextField("eMail", false, TextEditingController()),
-                            iTextField(
-                                "Password", true, TextEditingController()),
+                            iTextField("eMail", false, eMail),
+                            iTextField("Password", true, password),
                             SizedBox(
                               height: 70,
                             ),
-                            iButton("Register", () {
-                              _next();
+                            iButton("Register", () async {
+                              if (eMail.text != "" && password.text != "") {
+                                ExecStudentModel execStudent = ExecStudentModel(
+                                    studentId.text,
+                                    firstName.text,
+                                    lastName.text,
+                                    age.text,
+                                    gender,
+                                    height.text,
+                                    weight.text,
+                                    ethnicity.text,
+                                    medical.text,
+                                    goalWeight.text,
+                                    dailyCalGoal.text,
+                                    "Antony Tau",
+                                    eMail.text);
+                                var info = execStudent.conver();
+                                signUpStudent(eMail.text, password.text, info);
+                              }
                             })
                           ],
                         ),

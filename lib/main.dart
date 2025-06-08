@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
         '/nursingDashboard': (context) => NurseingDashboard(),
-        '/execStudentDashboard': (context) => DashboardPage()
+        '/execStudentDashboard': (context) => DashboardPage(),
+        '/registerExecStudent': (context) => RegisterExecStudent()
       },
     );
   }

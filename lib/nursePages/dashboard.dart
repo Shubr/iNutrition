@@ -50,7 +50,12 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
                     padding: const EdgeInsets.only(top: 10, left: 10, right: 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [iSmallButton("ADD", () {})],
+                      children: [
+                        iSmallButton("ADD", () {
+                          Navigator.pushReplacementNamed(
+                              context, '/registerExecStudent');
+                        })
+                      ],
                     ),
                   ),
                 ),
