@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,7 +6,7 @@ import 'package:inutrition/model/data_model.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 
 List<String> studentList = [];
-var error = "Hello";
+var error = "";
 
 Future<List<String>> getStudent() async {
   try {
@@ -53,6 +51,7 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
   int currentStep = 0;
 
   void _back() {
+    error = "";
     if (currentStep != 0) {
       setState(() {
         currentStep -= 1;
@@ -63,6 +62,7 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
   }
 
   void _next() {
+    error = "";
     if (currentStep < 3) {
       setState(() {
         currentStep += 1;
@@ -122,7 +122,13 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                               height: 70,
                             ),
                             iButton("Next", () {
-                              if (studentList.contains(studentId.text)) {
+                              if (studentId.text == "" ||
+                                  firstName.text == "" ||
+                                  lastName.text == "") {
+                                setState(() {
+                                  error = "Please fill in all fields";
+                                });
+                              } else if (studentList.contains(studentId.text)) {
                                 setState(() {
                                   error = "Student with this ID already exists";
                                 });
@@ -167,7 +173,17 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                         iTextField("Ethnicity", false, ethnicity),
                         iTextField("Exiting Medical Condition", false, medical),
                         iButton("Next", () {
-                          _next();
+                          if (age.text == "" ||
+                              gender == "" ||
+                              height.text == "" ||
+                              weight.text == "" ||
+                              ethnicity.text == "") {
+                            setState(() {
+                              error = "Please fill in all fields";
+                            });
+                          } else {
+                            _next();
+                          }
                         })
                       ],
                     ),
@@ -199,7 +215,14 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                               height: 70,
                             ),
                             iButton("Next", () {
-                              _next();
+                              if (goalWeight.text == "" ||
+                                  dailyCalGoal.text == "") {
+                                setState(() {
+                                  error = "Please fill in all fields";
+                                });
+                              } else {
+                                _next();
+                              }
                             })
                           ],
                         ),
@@ -249,6 +272,10 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                                     eMail.text);
                                 var info = execStudent.conver();
                                 signUpStudent(eMail.text, password.text, info);
+                              } else {
+                                setState(() {
+                                  error = "Please fill in all fields";
+                                });
                               }
                             })
                           ],

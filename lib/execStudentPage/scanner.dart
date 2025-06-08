@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
 class BarcodeScannerPage extends StatefulWidget {
@@ -37,7 +38,12 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     return SafeArea(
         child: SizedBox.expand(
       child: Stack(
-        children: [CameraPreview(cameraController!)],
+        children: [
+          SizedBox(
+              height: MediaQuery.sizeOf(context).height,
+              child: CameraPreview(cameraController!)),
+          Center(child: SvgPicture.asset("assets/icons/crossHair.svg"))
+        ],
       ),
     ));
   }
@@ -48,7 +54,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
       setState(() {
         cameras = _camera;
         cameraController =
-            CameraController(_camera.first, ResolutionPreset.high);
+            CameraController(_camera.first, ResolutionPreset.medium);
       });
     }
     cameraController?.initialize().then((_) {
