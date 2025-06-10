@@ -15,7 +15,7 @@ void main() async {
   });
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: RegisterExecStudent(),
+    home: DashboardPage(),
   ));
 }
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterExecStudent(),
+      home: DashboardPage(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
