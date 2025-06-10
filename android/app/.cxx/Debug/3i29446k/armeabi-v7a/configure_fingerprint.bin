@@ -2,6 +2,7 @@ C/C++ Structured Logk
 i
 g/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/additional_project_files.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ì¤òõ2 é¤òõ2h
 f
 d/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/android_gradle_build.json	ì¤òõ2Ç ê¤òõ2m
@@ -26,3 +27,29 @@ d
 b/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/symbol_folder_index.txt	ì¤òõ2Y ë¤òõ2`
 ^
 \/Users/shub/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt	ì¤òõ2¤ Á±Ñí2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	Óÿ«©ó2 üº•ûò2h
+f
+d/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/android_gradle_build.json	Óÿ«©ó2Ç üº•ûò2m
+k
+i/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/android_gradle_build_mini.json	Óÿ«©ó2Ò ýº•ûò2Z
+X
+V/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/build.ninja	Óÿ«©ó2ˆÄ õº•ûò2^
+\
+Z/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/build.ninja.txt	Óÿ«©ó2c
+a
+_/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/build_file_index.txt	Óÿ«©ó2\ ýº•ûò2d
+b
+`/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/compile_commands.json	Óÿ«©ó2h
+f
+d/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/compile_commands.json.bin	Óÿ«©ó2	n
+l
+j/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/metadata_generation_command.txt	Óÿ«©ó2
+° ýº•ûò2a
+_
+]/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/prefab_config.json	Óÿ«©ó2( ýº•ûò2f
+d
+b/Users/shub/Desktop/iNutrition/android/app/.cxx/Debug/3i29446k/armeabi-v7a/symbol_folder_index.txt	Óÿ«©ó2Y ýº•ûò2`
+^
+\/Users/shub/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt	Óÿ«©ó2¤ Á±Ñí2
+>>>>>>> 527ca938f983fe0feec3bad26fe2fbbff2605342
