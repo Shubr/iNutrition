@@ -4,13 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
+var fireStore = FirebaseFirestore.instance;
+var fireAuth = FirebaseAuth.instance;
+
 Future<String?> signUpNurse(
     String eMail, String password, Map<String, dynamic> nurseDetail) async {
   try {
     var studentId = nurseDetail["studentId"];
-    await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: eMail, password: password);
-    await FirebaseFirestore.instance
+    await fireAuth.createUserWithEmailAndPassword(
+        email: eMail, password: password);
+    await fireStore
         .collection("nursingStudent")
         .doc(studentId)
         .set(nurseDetail);
@@ -24,8 +27,8 @@ Future<String?> signUpNurse(
           return 'The email address is not valid.';
         case 'email-already-in-use':
           return 'An account already exists for that email.';
-        case 'channel-error': // Check for the network error code here
-          return 'Network error';
+        case 'channel-error':
+          return 'unable to connect to the cloud';
         case 'network-error':
           return 'Pelase check your internet connection';
         default:
@@ -40,16 +43,14 @@ Future<String> logIn(String studentId, String password) async {
 
   if (role.isNotEmpty) {
     if (role == "nursingStudent") {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection("nursingStudent")
-          .doc(studentId)
-          .get();
+      DocumentSnapshot snapshot =
+          await fireStore.collection("nursingStudent").doc(studentId).get();
 
       if (snapshot.exists) {
         Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
 
         if (data != null) {
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await fireAuth.signInWithEmailAndPassword(
               email: data['eMail'], password: password);
           log("successfully signed in as nurse");
           return 'nursingStudent';
@@ -58,14 +59,12 @@ Future<String> logIn(String studentId, String password) async {
         return "Coun't find Student";
       }
     } else if (role == "exerciseStudent") {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection("exerciseStudent")
-          .doc(studentId)
-          .get();
+      DocumentSnapshot snapshot =
+          await fireStore.collection("exerciseStudent").doc(studentId).get();
       if (snapshot.exists) {
         Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
         if (data != null) {
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await fireAuth.signInWithEmailAndPassword(
               email: data['eMail'], password: password);
           log("succesfully signed in as student");
           return 'exerciseStudent';
@@ -83,10 +82,10 @@ Future<String> logIn(String studentId, String password) async {
 Future<String> getRole(String studentId) async {
   try {
     QuerySnapshot<Map<String, dynamic>> nurseSnapshot =
-        await FirebaseFirestore.instance.collection("nursingStudent").get();
+        await fireStore.collection("nursingStudent").get();
 
     QuerySnapshot<Map<String, dynamic>> execStudentSnapshot =
-        await FirebaseFirestore.instance.collection("exerciseStudent").get();
+        await fireStore.collection("exerciseStudent").get();
     for (QueryDocumentSnapshot<Map<String, dynamic>> doc
         in nurseSnapshot.docs) {
       if (doc.id == studentId) {
@@ -105,11 +104,20 @@ Future<String> getRole(String studentId) async {
   return "Student dosen't exist.";
 }
 
-Future signUpStudent(String eMail, String password) async {}
+Future signUpStudent(String eMail, String password,
+    Map<String, dynamic> execStudentDetail) async {
+  try {
+    var studentId = execStudentDetail['studentId'];
+    fireAuth.createUserWithEmailAndPassword(email: eMail, password: password);
+    fireStore.collection("execStudent").doc(studentId).set(execStudentDetail);
+  } catch (e) {
+    log(e.hashCode.toString());
+  }
+}
 
 Future signOut() async {
   try {
-    await FirebaseAuth.instance.signOut();
+    await fireAuth.signOut();
   } catch (e) {
     log(e.toString());
   }

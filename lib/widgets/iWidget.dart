@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -339,4 +340,109 @@ Widget iLoadingAnimation() {
         child: LoadingAnimationWidget.stretchedDots(
             color: Colors.black87, size: 200)),
   );
+}
+
+class iRadio extends StatefulWidget {
+  final String category;
+  final String title1;
+  final String title2;
+  final String selected;
+  final void Function(String)? onChange;
+
+  const iRadio(
+      {super.key,
+      required this.category,
+      required this.title1,
+      required this.title2,
+      required this.selected,
+      this.onChange});
+
+  @override
+  State<iRadio> createState() => _iRadioState();
+}
+
+class _iRadioState extends State<iRadio> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  var selected = "";
+
+  _updateRadio(String value) {
+    setState(() {
+      selected = value;
+    });
+    widget.onChange?.call(value);
+  }
+
+  @override
+  Widget build(BuildContext content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.category,
+          style:
+              TextStyle(fontSize: 15, color: Colors.grey, fontFamily: "Afacad"),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Transform.scale(
+                  scale: 2,
+                  child: Radio(
+                    fillColor: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Colors.blue;
+                      }
+                      return Color.fromRGBO(
+                          178, 178, 178, 100); // default color
+                    }),
+                    value: widget.title1,
+                    groupValue: widget.selected,
+                    onChanged: (onChanged) {
+                      _updateRadio("Male");
+                    },
+                  ),
+                ),
+                Text(
+                  widget.title1,
+                  style: TextStyle(
+                      fontSize: 15, color: Colors.grey, fontFamily: "Afacad"),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Transform.scale(
+                  scale: 2,
+                  child: Radio(
+                      value: widget.title2,
+                      groupValue: widget.selected,
+                      fillColor: WidgetStateProperty.resolveWith((states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return Colors.blue;
+                        }
+                        return Color.fromRGBO(
+                            178, 178, 178, 100); // default color
+                      }),
+                      onChanged: (onChanged) {
+                        _updateRadio("Female");
+                      }),
+                ),
+                Text(
+                  widget.title2,
+                  style: TextStyle(
+                      fontSize: 15, color: Colors.grey, fontFamily: "Afacad"),
+                ),
+              ],
+            )
+          ],
+        )
+      ],
+    );
+  }
 }
