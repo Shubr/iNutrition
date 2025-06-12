@@ -155,7 +155,7 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
-                      spacing: 20,
+                      spacing: 10,
                       children: [
                         iTextField("Age", false, age),
                         iRadio(
@@ -172,6 +172,10 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                         iTextField("Weight(kg)", false, weight),
                         iTextField("Ethnicity", false, ethnicity),
                         iTextField("Exiting Medical Condition", false, medical),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red),
+                        ),
                         iButton("Next", () {
                           if (age.text == "" ||
                               gender == "" ||
@@ -211,6 +215,10 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                             iTextField("Goal Weight(kg)", false, goalWeight),
                             iTextField("Daily Calories Goal(cal)", false,
                                 dailyCalGoal),
+                            Text(
+                              error,
+                              style: TextStyle(color: Colors.red),
+                            ),
                             SizedBox(
                               height: 70,
                             ),
@@ -251,6 +259,10 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                           children: [
                             iTextField("eMail", false, eMail),
                             iTextField("Password", true, password),
+                            Text(
+                              error,
+                              style: TextStyle(color: Colors.red),
+                            ),
                             SizedBox(
                               height: 70,
                             ),

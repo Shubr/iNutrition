@@ -13,10 +13,7 @@ void main() async {
   await Firebase.initializeApp().whenComplete(() {
     print("complete");
   });
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: DashboardPage(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DashboardPage(),
+      home: NurseingDashboard(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
