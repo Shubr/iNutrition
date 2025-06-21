@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 var fireStore = FirebaseFirestore.instance;
 var fireAuth = FirebaseAuth.instance;
@@ -38,45 +39,20 @@ Future<String?> signUpNurse(
   }
 }
 
-Future<String> logIn(String studentId, String password) async {
-  var role = await getRole(studentId);
-
-  if (role.isNotEmpty) {
-    if (role == "nursingStudent") {
-      DocumentSnapshot snapshot =
-          await fireStore.collection("nursingStudent").doc(studentId).get();
-
-      if (snapshot.exists) {
-        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-
-        if (data != null) {
-          await fireAuth.signInWithEmailAndPassword(
-              email: data['eMail'], password: password);
-          log("successfully signed in as nurse");
-          return 'nursingStudent';
-        }
-      } else {
-        return "Coun't find Student";
-      }
-    } else if (role == "exerciseStudent") {
-      DocumentSnapshot snapshot =
-          await fireStore.collection("exerciseStudent").doc(studentId).get();
-      if (snapshot.exists) {
-        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-        if (data != null) {
-          await fireAuth.signInWithEmailAndPassword(
-              email: data['eMail'], password: password);
-          log("succesfully signed in as student");
-          return 'exerciseStudent';
-        }
-      } else {
-        return "Coun't find Student";
-      }
+Future logIn(String eMail, String password) async {
+  try {
+    await fireAuth.signInWithEmailAndPassword(email: eMail, password: password);
+    return true;
+  } on FirebaseAuthException catch (e) {
+    switch (e.code) {
+      case 'user-not-found':
+        return 'User Not Found';
+      case 'wrong-password':
+        return 'Incorrect Password';
+      default:
+        return 'Something went wrong.';
     }
-  } else {
-    return "";
   }
-  return "Something went wrong";
 }
 
 Future<String> getRole(String studentId) async {
@@ -110,8 +86,10 @@ Future signUpStudent(String eMail, String password,
     var studentId = execStudentDetail['studentId'];
     fireAuth.createUserWithEmailAndPassword(email: eMail, password: password);
     fireStore.collection("execStudent").doc(studentId).set(execStudentDetail);
+    return true;
   } catch (e) {
     log(e.hashCode.toString());
+    return false;
   }
 }
 

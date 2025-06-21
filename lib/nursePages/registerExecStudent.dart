@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/model/data_model.dart';
 import 'package:inutrition/widgets/iWidget.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 List<String> studentList = [];
 var error = "";
@@ -268,6 +269,19 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                             ),
                             iButton("Register", () async {
                               if (eMail.text != "" && password.text != "") {
+                                setState(() {
+                                  error = "";
+                                });
+                                showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) => Center(
+                                          child:
+                                              LoadingAnimationWidget.waveDots(
+                                            color: Colors.black,
+                                            size: 50,
+                                          ),
+                                        ));
                                 ExecStudentModel execStudent = ExecStudentModel(
                                     studentId.text,
                                     firstName.text,
@@ -283,7 +297,18 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                                     "Antony Tau",
                                     eMail.text);
                                 var info = execStudent.conver();
-                                signUpStudent(eMail.text, password.text, info);
+                                bool success = await signUpStudent(
+                                    eMail.text, password.text, info);
+
+                                Navigator.pop(context);
+                                if (success) {
+                                  Navigator.pushReplacementNamed(
+                                      context, '/nursingDashboard');
+                                } else {
+                                  setState(() {
+                                    error = "Something went wrong";
+                                  });
+                                }
                               } else {
                                 setState(() {
                                   error = "Please fill in all fields";

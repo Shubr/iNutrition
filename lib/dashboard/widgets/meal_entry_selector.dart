@@ -78,32 +78,30 @@ class MealEntrySelectorState extends State<MealEntrySelector> {
           ),
         ),
         icon: Icon(icon, size: isSmallScreen ? 36 : 48),
-        label: Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 16 : 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                recommendation,
+        label: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                title,
                 style: TextStyle(
-                  fontSize: isSmallScreen ? 13 : 16,
-                  fontWeight: FontWeight.w300,
+                  fontSize: isSmallScreen ? 16 : 20,
+                  fontWeight: FontWeight.w500,
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              recommendation,
+              style: TextStyle(
+                fontSize: isSmallScreen ? 13 : 16,
+                fontWeight: FontWeight.w300,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
         onPressed: () {
           Navigator.pushNamed(context, route);

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/widgets/iWidget.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../firebase_options.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var studentId = TextEditingController();
+  var eMail = TextEditingController();
   var password = TextEditingController();
 
   String? errorMessage = "";
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                         MainAxisAlignment.center, // vertical centering
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      iTextField("Student ID", false, studentId),
+                      iTextField("eMail", false, eMail),
                       SizedBox(
                         height: 10,
                       ),
@@ -58,37 +59,26 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 70),
                       iButton('Login', () async {
-                        setState(() {
-                          errorMessage = '';
-                        });
-                        if (studentId.text == "" || password.text == "") {
-                          setState(() {
-                            errorMessage = "Please fill in all fields";
-                          });
-                          return;
-                        }
-                        if (!mounted) {
-                          return;
-                        }
-                        try {
-                          String role =
-                              await logIn(studentId.text, password.text);
-                          if (role == "nursingStudent") {
-                            print("loggin in as nurse...");
+                        if (eMail.text != '' && password.text != "") {
+                          showDialog(
+                              context: context,
+                              builder: (context) => Center(
+                                    child: LoadingAnimationWidget.waveDots(
+                                        color: Colors.black, size: 50),
+                                  ));
+                          var result = await logIn(eMail.text, password.text);
+                          Navigator.pop(context);
+                          if (result) {
                             Navigator.pushReplacementNamed(
                                 context, '/nursingDashboard');
-                          } else if (role == 'exerciseStudent') {
-                            Navigator.pushReplacementNamed(
-                                context, '/execStudentDashboard');
                           } else {
                             setState(() {
-                              errorMessage =
-                                  "Sorry this Student isn't registered";
+                              errorMessage = result;
                             });
                           }
-                        } catch (e) {
+                        } else {
                           setState(() {
-                            errorMessage = "ERROR: $e";
+                            errorMessage = "Please fill in all feilds.";
                           });
                         }
                       }),
