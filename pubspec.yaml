@@ -67,6 +67,11 @@ flutter:
         - asset: assets/fonts/Alex/Alex_reg.ttf
         - asset: assets/fonts/Alex/Alex_bold.ttf
           weight: 600
+    - family: Avent
+      fonts:
+        - asset: assets/fonts/Advent_Pro/AventPro.ttf
+          weight: 100
+  
 
 flutter_native_splash:
   color: "#FFFFFF"

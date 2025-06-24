@@ -37,7 +37,7 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
   Future<void> _loadUser() async {
     var fireStore = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser;
-    var email;
+    String? email;
     if (user != null) {
       email = user.email;
     } else {

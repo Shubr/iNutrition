@@ -220,7 +220,7 @@ class _StudentCardState extends State<StudentCard> {
                     ],
                   ),
                   Text(
-                    "ID: 20340432",
+                    widget.studentDetails.studentId,
                     style: TextStyle(
                         color: Colors.grey, fontSize: 12, fontFamily: "Afacad"),
                   ),
@@ -427,4 +427,71 @@ class _iRadioState extends State<iRadio> {
       ],
     );
   }
+}
+
+Widget iNavigator() {
+  return SizedBox(
+    width: 280,
+    height: 80,
+    child: Container(
+      decoration: BoxDecoration(
+          color: Colors.black, borderRadius: BorderRadius.circular(10)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              "assets/icons/homeicon.svg",
+              width: 30,
+              height: 30,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              "assets/icons/donuticon.svg",
+              width: 30,
+              height: 30,
+            ),
+          ),
+          Transform.translate(
+            offset: const Offset(0, -30), // push up
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black, // background to contrast the white icon
+                border: Border.all(color: Colors.white, width: 5),
+              ),
+              child: SvgPicture.asset(
+                'assets/icons/barcodeicon.svg',
+                width: 40,
+                height: 40,
+                colorFilter:
+                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              "assets/icons/statsicon.svg",
+              width: 30,
+              height: 30,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              "assets/icons/settingicon.svg",
+              width: 30,
+              height: 30,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

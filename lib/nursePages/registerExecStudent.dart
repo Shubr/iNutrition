@@ -174,7 +174,7 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                         iTextField("Height(cm)", false, height),
                         iTextField("Weight(kg)", false, weight),
                         iTextField("Ethnicity", false, ethnicity),
-                        iTextField("Exiting Medical Condition", false, medical),
+                        iTextField("Existing Medical Condition", false, medical),
                         Text(
                           error,
                           style: TextStyle(color: Colors.red),

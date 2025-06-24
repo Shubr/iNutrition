@@ -49,12 +49,12 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
   }
 
   Future<void> _setupCamerController() async {
-    List<CameraDescription> _camera = await availableCameras();
-    if (_camera.isNotEmpty) {
+    List<CameraDescription> camera = await availableCameras();
+    if (camera.isNotEmpty) {
       setState(() {
-        cameras = _camera;
+        cameras = camera;
         cameraController =
-            CameraController(_camera.first, ResolutionPreset.medium);
+            CameraController(camera.first, ResolutionPreset.medium);
       });
     }
     cameraController?.initialize().then((_) {

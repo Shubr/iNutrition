@@ -27,7 +27,7 @@ Future signUpNurse(
         case 'network-error':
           return 'Pelase check your internet connection';
         default:
-          return 'Firebase Authentication error: ${e.message}--${e.code}';
+          return 'Something went wrong. Please try again later';
       }
     }
   }

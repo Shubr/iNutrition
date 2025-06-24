@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:inutrition/model/data_model.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 import 'package:inutrition/auth/auth.dart';
@@ -226,10 +225,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                       Navigator.pushReplacementNamed(
                                           context, "/nursingDashboard");
                                     } else {
-                                      fieldError = registerNuse;
+                                      setState(() {
+                                        fieldError = registerNuse.toString();
+                                      });
                                     }
                                   } else {
-                                    fieldError = "Please fill all fields";
+                                    setState(() {
+                                      fieldError = "Please fill all fields";
+                                    });
                                   }
                                 })
                               ],

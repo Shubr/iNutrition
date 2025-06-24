@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:inutrition/auth/login.dart';
 import 'package:inutrition/auth/register.dart';
+import 'package:inutrition/execStudentPage/dashboard.dart';
 
 import 'package:inutrition/firebase_options.dart';
 import 'package:inutrition/nursePages/dashboard.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: ExecStudentDashboard(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
