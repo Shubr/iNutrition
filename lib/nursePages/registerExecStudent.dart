@@ -49,6 +49,8 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
   var eMail = TextEditingController();
   var password = TextEditingController();
 
+  String? currentUser = fireAuth.currentUser?.email;
+
   int currentStep = 0;
 
   void _back() {
@@ -294,7 +296,7 @@ class _RegisterExecStudentState extends State<RegisterExecStudent> {
                                     medical.text,
                                     goalWeight.text,
                                     dailyCalGoal.text,
-                                    "Antony Tau",
+                                    currentUser ?? "",
                                     eMail.text);
                                 var info = execStudent.conver();
                                 bool success = await signUpStudent(

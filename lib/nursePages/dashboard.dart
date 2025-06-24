@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inutrition/auth/auth.dart';
+import 'package:inutrition/model/student_tracker_model.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 import 'package:inutrition/services.dart';
 
@@ -16,10 +17,21 @@ class NurseingDashboard extends StatefulWidget {
 class _NurseingDashboardState extends State<NurseingDashboard> {
   String? firstName;
   String? lastName;
+  List<StudentTrackerModel> assignedStudents = [];
+
   @override
   void initState() {
     super.initState();
     _loadUser();
+    _initData();
+  }
+
+  Future<void> _initData() async {
+    List<StudentTrackerModel> students =
+        await getCurrentUserExecStudentAsList();
+    setState(() {
+      assignedStudents = students;
+    });
   }
 
   Future<void> _loadUser() async {
@@ -121,23 +133,12 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
                   child: SingleChildScrollView(
                     child: Column(
                       spacing: 20,
-                      children: [
-                        // iStudentCard("Shubham Rangra", 40, () {}),
-                        // iStudentCard("Antonio Munro", 90, () {}),
-                        // iStudentCard("Jessey Tau", 80, () {}),
-                        StudentCard(
-                            stdName: "Shubham Rangra",
-                            todayCalPrecent: 65,
-                            onPress: () {}),
-                        StudentCard(
-                            stdName: "Antonio Munro",
-                            todayCalPrecent: 80,
-                            onPress: () {}),
-                        StudentCard(
-                            stdName: "Jesse Tau",
-                            todayCalPrecent: 50,
-                            onPress: () {})
-                      ],
+                      children: assignedStudents.map((student) {
+                        return StudentCard(
+                            stdName: "${student.firstName} ${student.lastName}",
+                            todayCalPrecent: 0,
+                            onPress: () {});
+                      }).toList(),
                     ),
                   ),
                 )
