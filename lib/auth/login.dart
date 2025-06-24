@@ -1,11 +1,7 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/widgets/iWidget.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../firebase_options.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -67,10 +63,17 @@ class _LoginPageState extends State<LoginPage> {
                                         color: Colors.black, size: 50),
                                   ));
                           var result = await logIn(eMail.text, password.text);
+
                           Navigator.pop(context);
                           if (result) {
-                            Navigator.pushReplacementNamed(
-                                context, '/nursingDashboard');
+                            var role = await getRole(eMail.text);
+                            if (role == "nursingStudent") {
+                              Navigator.pushReplacementNamed(
+                                  context, "/nursingDashboard");
+                            } else {
+                              Navigator.pushReplacementNamed(
+                                  context, "/execStudentDashboard");
+                            }
                           } else {
                             setState(() {
                               errorMessage = result;

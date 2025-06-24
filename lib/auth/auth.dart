@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 var fireStore = FirebaseFirestore.instance;
 var fireAuth = FirebaseAuth.instance;
@@ -11,13 +9,9 @@ var fireAuth = FirebaseAuth.instance;
 Future<String?> signUpNurse(
     String eMail, String password, Map<String, dynamic> nurseDetail) async {
   try {
-    var studentId = nurseDetail["studentId"];
     await fireAuth.createUserWithEmailAndPassword(
         email: eMail, password: password);
-    await fireStore
-        .collection("nursingStudent")
-        .doc(studentId)
-        .set(nurseDetail);
+    await fireStore.collection("nursingStudent").doc(eMail).set(nurseDetail);
     return "Successfully added to firestore";
   } catch (e) {
     if (e is FirebaseAuthException) {
@@ -44,48 +38,47 @@ Future logIn(String eMail, String password) async {
     await fireAuth.signInWithEmailAndPassword(email: eMail, password: password);
     return true;
   } on FirebaseAuthException catch (e) {
+    print("-----------------${e.code}");
     switch (e.code) {
       case 'user-not-found':
         return 'User Not Found';
       case 'wrong-password':
         return 'Incorrect Password';
+      case "invalid-credential":
+        return 'Incorrect eMail/Password';
       default:
         return 'Something went wrong.';
     }
   }
 }
 
-Future<String> getRole(String studentId) async {
-  try {
-    QuerySnapshot<Map<String, dynamic>> nurseSnapshot =
-        await fireStore.collection("nursingStudent").get();
+Future<String> getRole(String eMail) async {
+  final nurseQuery = await fireStore
+      .collection("nursingStudent")
+      .where("eMail", isEqualTo: eMail)
+      .get();
 
-    QuerySnapshot<Map<String, dynamic>> execStudentSnapshot =
-        await fireStore.collection("exerciseStudent").get();
-    for (QueryDocumentSnapshot<Map<String, dynamic>> doc
-        in nurseSnapshot.docs) {
-      if (doc.id == studentId) {
-        return "nursingStudent";
-      }
-    }
-    for (QueryDocumentSnapshot<Map<String, dynamic>> doc
-        in execStudentSnapshot.docs) {
-      if (doc.id == studentId) {
-        return "exerciseStudent";
-      }
-    }
-  } catch (e) {
-    log("Error: $e");
+  if (nurseQuery.docs.isNotEmpty) {
+    return 'nursingStudent';
   }
-  return "Student dosen't exist.";
+
+  final execQuery = await fireStore
+      .collection("execStudent")
+      .where("eMail", isEqualTo: eMail)
+      .get();
+
+  if (execQuery.docs.isNotEmpty) {
+    return 'execStudent';
+  }
+
+  return 'none';
 }
 
 Future signUpStudent(String eMail, String password,
     Map<String, dynamic> execStudentDetail) async {
   try {
-    var studentId = execStudentDetail['studentId'];
     fireAuth.createUserWithEmailAndPassword(email: eMail, password: password);
-    fireStore.collection("execStudent").doc(studentId).set(execStudentDetail);
+    fireStore.collection("execStudent").doc(eMail).set(execStudentDetail);
     return true;
   } catch (e) {
     log(e.hashCode.toString());
