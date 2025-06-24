@@ -2,14 +2,28 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Progressbar extends StatefulWidget {
-  const Progressbar({super.key});
+  final int currentCalories;
+  final int dailyGoal;
+
+  const Progressbar({
+    super.key,
+    required this.currentCalories,
+    required this.dailyGoal,
+  });
 
   @override
   State<Progressbar> createState() => _ProgressbarState();
 }
 
 class _ProgressbarState extends State<Progressbar> {
-  final double progress = 0.9;
+  double get progress {
+    if (widget.dailyGoal <= 0) return 0.0;
+    return (widget.currentCalories / widget.dailyGoal).clamp(0.0, 1.0);
+  }
+
+  int get caloriesLeft {
+    return (widget.dailyGoal - widget.currentCalories).clamp(0, widget.dailyGoal);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +35,7 @@ class _ProgressbarState extends State<Progressbar> {
         children: [
           CustomPaint(
             size: const Size(200, 200),
-            painter: GradientCirclePainter(0.5),
+            painter: GradientCirclePainter(progress),
           ),
           // Inner white circle to create spacing
           Container(
@@ -55,15 +69,15 @@ class _ProgressbarState extends State<Progressbar> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Text(
-                      "30",
-                      style: TextStyle(
+                      "${widget.currentCalories}",
+                      style: const TextStyle(
                           fontFamily: "Avent",
                           fontSize: 50,
                           color: Color.fromARGB(255, 0, 161, 255)),
                     ),
-                    Text(
+                    const Text(
                       "cal",
                       style: TextStyle(
                           fontFamily: "Avent",
@@ -73,8 +87,8 @@ class _ProgressbarState extends State<Progressbar> {
                   ],
                 ),
                 Text(
-                  "30cal left",
-                  style: TextStyle(
+                  "${caloriesLeft}cal left",
+                  style: const TextStyle(
                       fontFamily: "Afacad",
                       color: Color.fromARGB(255, 122, 122, 122),
                       fontWeight: FontWeight.bold,

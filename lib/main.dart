@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:inutrition/auth/login.dart';
 import 'package:inutrition/auth/register.dart';
 import 'package:inutrition/execStudentPage/dashboard.dart';
+import 'package:inutrition/dashboard/widgets/meal_entry_screen.dart';
 
 import 'package:inutrition/firebase_options.dart';
 import 'package:inutrition/nursePages/dashboard.dart';
 import 'package:inutrition/dashboard/dashboard.dart';
 import 'package:inutrition/nursePages/registerExecStudent.dart';
+import 'package:inutrition/execStudentPage/user_profile_page.dart';
+import 'package:inutrition/widgets/bottom_nav_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,13 +26,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ExecStudentDashboard(),
+      home: const BottomNavBar(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (content) => const RegisterPage(),
         '/nursingDashboard': (context) => NurseingDashboard(),
-        '/execStudentDashboard': (context) => DashboardPage(),
-        '/registerExecStudent': (context) => RegisterExecStudent()
+        '/execStudentDashboard': (context) => ExecStudentDashboard(),
+        '/registerExecStudent': (context) => RegisterExecStudent(),
+        '/breakfastEntry': (context) => const MealEntryScreen(mealType: 'breakfast'),
+        '/lunchEntry': (context) => const MealEntryScreen(mealType: 'lunch'),
+        '/dinnerEntry': (context) => const MealEntryScreen(mealType: 'dinner'),
+        '/userProfile': (context) => const UserProfilePage(),
       },
     );
   }
