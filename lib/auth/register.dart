@@ -219,16 +219,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                         course.text,
                                         eMail.text);
                                     var info = nurseInfo.conver();
-                                    String? returnVal = await signUpNurse(
+                                    var registerNuse = await signUpNurse(
                                         eMail.text, password.text, info);
-                                    if (returnVal == "") {
-                                      setState(() {
-                                        fieldError = "Successfull";
-                                      });
+                                    if (registerNuse) {
+                                      logIn(eMail.text, password.text);
+                                      Navigator.pushReplacementNamed(
+                                          context, "/nursingDashboard");
                                     } else {
-                                      setState(() {
-                                        fieldError = returnVal;
-                                      });
+                                      fieldError = registerNuse;
                                     }
                                   } else {
                                     fieldError = "Please fill all fields";

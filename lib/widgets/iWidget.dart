@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inutrition/model/student_tracker_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 Widget iTextField(String name, bool isPassword, TextEditingController text) {
@@ -141,12 +142,14 @@ class StudentCard extends StatefulWidget {
   final String stdName;
   final double todayCalPrecent;
   final VoidCallback onPress;
+  final StudentTrackerModel studentDetails;
 
   const StudentCard(
       {super.key,
       required this.stdName,
       required this.todayCalPrecent,
-      required this.onPress});
+      required this.onPress,
+      required this.studentDetails});
 
   @override
   State<StudentCard> createState() => _StudentCardState();
@@ -231,7 +234,7 @@ class _StudentCardState extends State<StudentCard> {
                             SizedBox(
                               width: 100,
                               child: Text(
-                                "Gender: ",
+                                "Gender: ${widget.studentDetails.gender}",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
@@ -241,31 +244,7 @@ class _StudentCardState extends State<StudentCard> {
                             SizedBox(
                               width: 100,
                               child: Text(
-                                "Age: ",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontFamily: "Afacad"),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              child: Text(
-                                "Height: ",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontFamily: "Afacad"),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: Text(
-                                "Weight: ",
+                                "Age: ${widget.studentDetails.age}",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
@@ -277,8 +256,11 @@ class _StudentCardState extends State<StudentCard> {
                         SizedBox(
                           height: 20,
                         ),
-                        iTextFieldv2("Daily Calorie inTake", false,
-                            TextEditingController(), "2"),
+                        iTextFieldv2(
+                            "Daily Calorie inTake",
+                            false,
+                            TextEditingController(),
+                            widget.studentDetails.dailyCal),
                         SizedBox(
                           height: 20,
                         ),

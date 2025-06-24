@@ -6,13 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 var fireStore = FirebaseFirestore.instance;
 var fireAuth = FirebaseAuth.instance;
 
-Future<String?> signUpNurse(
+Future signUpNurse(
     String eMail, String password, Map<String, dynamic> nurseDetail) async {
   try {
     await fireAuth.createUserWithEmailAndPassword(
         email: eMail, password: password);
     await fireStore.collection("nursingStudent").doc(eMail).set(nurseDetail);
-    return "Successfully added to firestore";
+    return true;
   } catch (e) {
     if (e is FirebaseAuthException) {
       switch (e.code) {

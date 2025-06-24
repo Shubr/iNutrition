@@ -43,8 +43,6 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
     } else {
       return;
     }
-    print("-------------");
-    print(user.email);
 
     // Check nursingStudent
     final nurseDocRef = fireStore.collection("nursingStudent").doc(email);
@@ -135,9 +133,11 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
                       spacing: 20,
                       children: assignedStudents.map((student) {
                         return StudentCard(
-                            stdName: "${student.firstName} ${student.lastName}",
-                            todayCalPrecent: 0,
-                            onPress: () {});
+                          stdName: "${student.firstName} ${student.lastName}",
+                          todayCalPrecent: 0,
+                          onPress: () {},
+                          studentDetails: student,
+                        );
                       }).toList(),
                     ),
                   ),
