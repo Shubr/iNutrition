@@ -220,7 +220,7 @@ class _StudentCardState extends State<StudentCard> {
                     ],
                   ),
                   Text(
-                    "ID: 20340432",
+                    "ID: ${widget.studentDetails.studentId}",
                     style: TextStyle(
                         color: Colors.grey, fontSize: 12, fontFamily: "Afacad"),
                   ),
