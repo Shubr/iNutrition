@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inutrition/auth/auth.dart';
 import 'package:inutrition/widgets/iWidget.dart';
+import 'package:inutrition/services.dart';
 
 class NurseingDashboard extends StatefulWidget {
   const NurseingDashboard({super.key});
@@ -11,6 +14,56 @@ class NurseingDashboard extends StatefulWidget {
 }
 
 class _NurseingDashboardState extends State<NurseingDashboard> {
+  String? firstName;
+  String? lastName;
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    var fireStore = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser;
+    var email;
+    if (user != null) {
+      email = user.email;
+    } else {
+      return;
+    }
+    print("-------------");
+    print(user.email);
+
+    // Check nursingStudent
+    final nurseDocRef = fireStore.collection("nursingStudent").doc(email);
+    final nurseDoc = await nurseDocRef.get();
+
+    if (nurseDoc.exists) {
+      final data = nurseDoc.data();
+      setState(() {
+        firstName = data?['firstName'];
+        lastName = data?['lastName'];
+      });
+      return;
+    }
+
+    // Check execStudent
+    final execDocRef = fireStore.collection("execStudent").doc(email);
+    final execDoc = await execDocRef.get();
+
+    if (execDoc.exists) {
+      final data = execDoc.data();
+      setState(() {
+        firstName = data?['firstName'];
+        lastName = data?['lastName'];
+      });
+      print("Exec Student: $firstName $lastName");
+      return;
+    }
+
+    print("User not found in either collection");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +86,9 @@ class _NurseingDashboardState extends State<NurseingDashboard> {
                 ))
           ],
           centerTitle: false,
-          title: Text("Antony Lau"),
+          title: Text(firstName != null && lastName != null
+              ? "$firstName $lastName"
+              : "Loading..."),
           titleTextStyle: TextStyle(
               fontWeight: FontWeight.w600,
               color: Colors.black,

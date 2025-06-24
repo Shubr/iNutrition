@@ -82,7 +82,7 @@ class NurseModel {
   Map<String, dynamic> conver() {
     var info = {
       "studentId": studentId,
-      "fistName": firstName,
+      "firstName": firstName,
       "lastName": lastName,
       "college": collegeName,
       "course": courseName,

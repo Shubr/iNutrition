@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushNamed(context, '/register');
                           },
                           child: const Text(
-                            "Don't have an account",
+                            "Create Nursing Account",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.grey,

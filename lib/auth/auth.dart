@@ -38,7 +38,6 @@ Future logIn(String eMail, String password) async {
     await fireAuth.signInWithEmailAndPassword(email: eMail, password: password);
     return true;
   } on FirebaseAuthException catch (e) {
-    print("-----------------${e.code}");
     switch (e.code) {
       case 'user-not-found':
         return 'User Not Found';
